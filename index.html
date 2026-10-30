@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7fb" />
+    <title>CampusDay — Student planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app" class="app-shell">
+      <section
+        id="login-view"
+        class="login-view"
+        aria-labelledby="login-heading"
+      >
+        <div class="login-brand">
+          <span class="brand-mark">✳</span> CampusDay
+        </div>
+        <div class="login-card">
+          <div class="login-icon">✦</div>
+          <p class="eyebrow">YOUR SCHOOL, IN SYNC</p>
+          <h1 id="login-heading">A little more<br />on top of things.</h1>
+          <p class="muted">
+            Keep classes, deadlines, and plans in one calm place.
+          </p>
+          <form id="login-form">
+            <label for="student-name">What should we call you?</label>
+            <input
+              id="student-name"
+              name="name"
+              type="text"
+              placeholder="Your name"
+              autocomplete="name"
+              required
+              maxlength="40"
+            />
+            <button class="button button-primary full-width" type="submit">
+              Continue to your planner <span>→</span>
+            </button>
+          </form>
+          <p class="login-note">
+            <span>🔒</span> Demo sign-in for this class project. Your name stays
+            on this device.
+          </p>
+        </div>
+        <p class="login-footer">A clearer week starts here.</p>
+      </section>
+
+      <div id="dashboard-view" class="dashboard-view" hidden>
+        <aside class="sidebar">
+          <a class="brand" href="#top" aria-label="CampusDay home"
+            ><span class="brand-mark">✳</span><span>CampusDay</span></a
+          >
+          <div class="sidebar-label">WORKSPACE</div>
+          <nav class="side-nav" aria-label="Main navigation">
+            <a class="nav-link active" href="#overview"
+              ><span class="nav-icon">◫</span> Overview</a
+            >
+            <a class="nav-link" href="#assignments"
+              ><span class="nav-icon">☷</span> Assignments
+              <span class="nav-count" id="nav-task-count">0</span></a
+            >
+            <a class="nav-link" href="#timetable"
+              ><span class="nav-icon">▦</span> Timetable</a
+            >
+          </nav>
+          <div class="sidebar-tip">
+            <div class="tip-spark">✦</div>
+            <strong>One thing at a time.</strong>
+            <p>Small steps add up to a great week.</p>
+          </div>
+          <div class="profile-row">
+            <div id="avatar" class="avatar">S</div>
+            <div class="profile-meta">
+              <strong id="profile-name">Student</strong><span>My planner</span>
+            </div>
+            <button
+              id="sign-out"
+              class="sign-out"
+              title="Sign out"
+              aria-label="Sign out"
+            >
+              ↪
+            </button>
+          </div>
+        </aside>
+
+        <div class="main-area" id="top">
+          <header class="topbar">
+            <div class="breadcrumb">My workspace <span>/</span> Overview</div>
+            <div class="topbar-right">
+              <div class="today-pill">
+                <span>◷</span><span id="today-label"></span>
+              </div>
+              <div class="top-avatar" id="top-avatar">S</div>
+            </div>
+          </header>
+          <div class="page-content">
+            <section id="overview" class="welcome-row">
+              <div>
+                <p class="eyebrow">YOUR STUDENT PLANNER</p>
+                <h1>
+                  Hey, <span id="welcome-name">there</span>
+                  <span class="wave">✦</span>
+                </h1>
+                <p class="muted">
+                  A fresh start, one class and task at a time.
+                </p>
+              </div>
+              <button class="button button-primary" id="add-assignment-top">
+                <span>＋</span> Add assignment
+              </button>
+            </section>
+            <section class="stat-grid" aria-label="Your week at a glance">
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Due this week</span
+                  ><span class="stat-icon lilac">◷</span>
+                </div>
+                <strong id="due-week-count">0</strong>
+                <div class="stat-foot">
+                  <span class="dot dot-purple"></span> assignments to plan for
+                </div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Completed</span><span class="stat-icon mint">✓</span>
+                </div>
+                <strong id="completed-count">0</strong>
+                <div class="stat-foot">
+                  <span class="positive">Nice work!</span> keep your momentum
+                </div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top">
+                  <span>Next class</span><span class="stat-icon peach">⌁</span>
+                </div>
+                <strong id="next-class">—</strong>
+                <div class="stat-foot" id="next-class-sub">
+                  Your next lesson, right on time
+                </div>
+              </article>
+            </section>
+
+            <div class="content-grid">
+              <section class="panel assignments-panel" id="assignments">
+                <div class="panel-heading">
+                  <div>
+                    <div class="heading-title">
+                      <h2>Assignments</h2>
+                      <span class="count-chip" id="open-count">0</span>
+                    </div>
+                    <p class="muted">Keep an eye on what’s coming up.</p>
+                  </div>
+                  <button class="text-button" id="view-all">
+                    View all <span>→</span>
+                  </button>
+                </div>
+                <div
+                  class="filter-row"
+                  role="group"
+                  aria-label="Filter assignments"
+                >
+                  <button class="filter-chip selected" data-filter="all">
+                    All</button
+                  ><button class="filter-chip" data-filter="open">To do</button
+                  ><button class="filter-chip" data-filter="done">Done</button>
+                </div>
+                <div id="assignment-list" class="assignment-list"></div>
+              </section>
+
+              <section class="panel timetable-panel" id="timetable">
+                <div class="panel-heading">
+                  <div>
+                    <div class="heading-title">
+                      <h2>This week</h2>
+                      <span class="week-badge">WEEKLY VIEW</span>
+                    </div>
+                    <p class="muted">Your classes at a glance.</p>
+                  </div>
+                  <button
+                    class="icon-button"
+                    id="add-class"
+                    title="Add a class"
+                    aria-label="Add a class"
+                  >
+                    ＋
+                  </button>
+                </div>
+                <div class="week-strip" id="week-strip"></div>
+                <div class="schedule-heading">
+                  <span id="selected-day-label">MONDAY</span
+                  ><span id="class-count-label">0 classes</span>
+                </div>
+                <div id="class-list" class="class-list"></div>
+                <div class="timetable-note">
+                  <span>✦</span> Make room for breaks, too.
+                </div>
+              </section>
+            </div>
+            <footer class="page-footer">
+              <span>Made for your school days</span><span>✳ CampusDay</span>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <dialog id="assignment-dialog" class="modal">
+      <form id="assignment-form" method="dialog">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">STAY ONE STEP AHEAD</p>
+            <h2>New assignment</h2>
+          </div>
+          <button
+            class="close-button"
+            type="button"
+            data-close="assignment-dialog"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <label for="assignment-title">Assignment name</label
+        ><input
+          id="assignment-title"
+          name="title"
+          placeholder="e.g. Read chapter 4"
+          required
+          maxlength="80"
+        />
+        <div class="form-grid">
+          <div>
+            <label for="assignment-subject">Subject</label
+            ><input
+              id="assignment-subject"
+              name="subject"
+              placeholder="e.g. Biology"
+              required
+              maxlength="40"
+            />
+          </div>
+          <div>
+            <label for="assignment-due">Due date</label
+            ><input id="assignment-due" name="due" type="date" required />
+          </div>
+        </div>
+        <label for="assignment-priority">Priority</label
+        ><select id="assignment-priority" name="priority">
+          <option>Normal</option>
+          <option>High</option>
+          <option>Low</option>
+        </select>
+        <div class="modal-actions">
+          <button
+            class="button button-quiet"
+            type="button"
+            data-close="assignment-dialog"
+          >
+            Cancel</button
+          ><button class="button button-primary" type="submit">
+            Save assignment
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="class-dialog" class="modal">
+      <form id="class-form" method="dialog">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">BUILD YOUR WEEK</p>
+            <h2>Add a class</h2>
+          </div>
+          <button
+            class="close-button"
+            type="button"
+            data-close="class-dialog"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <label for="class-name">Class name</label
+        ><input
+          id="class-name"
+          name="name"
+          placeholder="e.g. Chemistry"
+          required
+          maxlength="60"
+        />
+        <div class="form-grid">
+          <div>
+            <label for="class-day">Day</label
+            ><select id="class-day" name="day"></select>
+          </div>
+          <div>
+            <label for="class-room">Room</label
+            ><input
+              id="class-room"
+              name="room"
+              placeholder="e.g. Lab 2"
+              maxlength="30"
+            />
+          </div>
+        </div>
+        <div class="form-grid">
+          <div>
+            <label for="class-start">Starts</label
+            ><input id="class-start" name="start" type="time" required />
+          </div>
+          <div>
+            <label for="class-end">Ends</label
+            ><input id="class-end" name="end" type="time" required />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button
+            class="button button-quiet"
+            type="button"
+            data-close="class-dialog"
+          >
+            Cancel</button
+          ><button class="button button-primary" type="submit">
+            Save class
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
